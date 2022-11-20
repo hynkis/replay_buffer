@@ -68,20 +68,16 @@ class ReplayBufferDisc():
         """
         # Save transition data in current episode
         for transition in self.mini_buffer:
-            s_img, s_obs, s_dyn, s_path, a, r, s_img_prime, s_obs_prime, s_dyn_prime, s_path_prime, done, n_epi, episode_step = transition
+            s_img, s_obs, a, r, s_img_prime, s_obs_prime, done, n_epi, episode_step = transition
             data_name = str(n_epi).zfill(4) + "_" + str(episode_step).zfill(4) + ".npz"
             data_path = os.path.join(self.save_dir, data_name)
             np.savez_compressed(data_path,
                                 s_img = s_img,
                                 s_obs = s_obs,
-                                s_dyn = s_dyn,
-                                s_path = s_path,
                                 a = a,
                                 r = r,
                                 s_img_prime = s_img_prime,
                                 s_obs_prime = s_obs_prime,
-                                s_dyn_prime = s_dyn_prime,
-                                s_path_prime = s_path_prime,
                                 done = done,
                                 n_epi = n_epi,
                                 episode_step = episode_step)
